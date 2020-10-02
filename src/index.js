@@ -21,12 +21,12 @@ new Server({
 const button = document.getElementById("fetch-btn");
 
 button.addEventListener("click", function() {
-  fetch("/api/users")
-  .then(response => {
-    if (!response.ok) throw Error(response.statusText);
-    return response.json();
-  })
-  .then(json => buildList(json));
+  fetch("/api/users/")
+    .then(response => {
+      if (!response.ok) throw Error(response.statusText);
+      return response.json();
+    })
+    .then(json => buildList(json));
 });
 
 //lista de usuário
