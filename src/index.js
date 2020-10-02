@@ -20,6 +20,7 @@ new Server({
 //obter dados ao clicar no botao
 const button = document.getElementById("fetch-btn");
 
+/*fetch, jest
 button.addEventListener("click", function() {
   fetch("/api/users/")
     .then(response => {
@@ -27,6 +28,18 @@ button.addEventListener("click", function() {
       return response.json();
     })
     .then(json => buildList(json));
+});*/
+
+//cypress,necessário utilizar XMLHttpRequest pois nao tem suporte a fetch
+button.addEventListener("click", function() {
+  // AJAX request with XMLHttpRequest
+  const request = new XMLHttpRequest();
+  request.open("GET", "/api/users/");
+  request.onload = function() {
+    const jsonResponse = JSON.parse(this.response);
+    buildList(jsonResponse);
+  };
+  request.send();
 });
 
 //lista de usuário
