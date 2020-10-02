@@ -25,7 +25,18 @@ describe("Users API", () => {
     const json = await getUsers();
     expect(json).toMatchObject(expected);
 
+    //testando se: a função foi chamada com o parâmetro apropriado
+    //a função foi chamada exatamente uma vez
+    expect(window.fetch).toHaveBeenCalledWith(
+      "https://api.valentinog.com/api/users/"
+    );
+
+    expect(window.fetch).toHaveBeenCalledTimes(1);
+
+    expect(json).toMatchObject(expected);
+
     //restaurando versao real do fetch
     window.fetch.mockRestore();
+    
   });
 });
