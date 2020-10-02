@@ -13,7 +13,19 @@ describe("Users API", () => {
       { name: "Caty", surname: "B." }
     ];
 
+    //Inspecionar o método
+    jest.spyOn(window, "fetch").mockImplementation(() => {
+      const fetchResponse = {
+        ok: true,
+        json: () => Promise.resolve(expected)
+      };
+      return Promise.resolve(fetchResponse);
+    });
+
     const json = await getUsers();
     expect(json).toMatchObject(expected);
+
+    //restaurando versao real do fetch
+    window.fetch.mockRestore();
   });
 });
