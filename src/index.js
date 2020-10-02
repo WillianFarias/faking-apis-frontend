@@ -1,8 +1,8 @@
-import { Server } from "miragejs";
+//import { Server } from "miragejs";
 
 //interceptando a chamada para api/users/ com miragejs usando um objto Server
 //configurado com um endpoint falso. *poderia estar em outro lugar
-new Server({
+/*new Server({
   routes() {
     this.namespace = "api";
 
@@ -14,7 +14,7 @@ new Server({
       ];
     });
   }
-});
+});*/
 
 
 //obter dados ao clicar no botao
@@ -31,7 +31,7 @@ button.addEventListener("click", function() {
 });*/
 
 //cypress,necessário utilizar XMLHttpRequest pois nao tem suporte a fetch
-button.addEventListener("click", function() {
+/*button.addEventListener("click", function() {
   // AJAX request with XMLHttpRequest
   const request = new XMLHttpRequest();
   request.open("GET", "/api/users/");
@@ -45,5 +45,29 @@ button.addEventListener("click", function() {
 //lista de usuário
 function buildList(data) {
   console.log(data);
-}
+}*/
 
+button.addEventListener("click", function() {
+  // AJAX request with XMLHttpRequest
+  const request = new XMLHttpRequest();
+  request.open("GET", "http://localhost:3000/users/");
+  request.onload = function() {
+    const jsonResponse = JSON.parse(this.response);
+    buildList(jsonResponse);
+  };
+  request.send();
+});
+
+/*
+Build the user's list
+ */
+function buildList(data) {
+  const ul = document.createElement("ul");
+  for (const user of data) {
+    const li = document.createElement("li");
+    // innerText danger!!
+    li.innerText = user.name;
+    ul.appendChild(li);
+  }
+  document.body.appendChild(ul);
+}

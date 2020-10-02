@@ -1,4 +1,4 @@
-describe("Users API", () => {
+/*describe("Users API", () => {
   it("should see a list of users", () => {
     cy.visit("http://localhost:8080/");
 
@@ -19,5 +19,15 @@ describe("Users API", () => {
     });
 
     cy.contains("FETCH").click();
+  });
+});*/
+
+describe("Users API", () => {
+  it("should see a list of users", () => {
+    cy.visit("http://localhost:8080/");
+
+    cy.contains("FETCH").click();
+
+    cy.contains(/Jonas|Chris|Juliana/);
   });
 });
